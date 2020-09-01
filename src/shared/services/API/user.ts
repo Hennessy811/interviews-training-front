@@ -2,7 +2,7 @@ import { UserResponse } from '../../../store/Users/users.reducer';
 import { message } from 'antd';
 
 const isDev = () => process.env.NODE_ENV === 'development';
-const BASE_URL = isDev() ? 'http://localhost:3000' : 'http://localhost:3000';
+const BASE_URL = isDev() ? 'http://localhost:3000' : 'https://interviews-training-api.vercel.app';
 
 export const delay = (ms: number): Promise<void> => new Promise((res) => setTimeout(res, ms));
 
@@ -15,6 +15,6 @@ export const getUser = async (user: UserResponse): Promise<UserResponse> => {
     })
         .then((r) => r.json())
         .catch(() => {
-            message.error('Ошибка при входе, попробуйте позже');
+            message.error('Ошибка при входе (1), попробуйте позже');
         });
 };
