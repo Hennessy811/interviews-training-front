@@ -21,6 +21,8 @@ const Auth = () => {
     };
 
     const onError = (response: any) => {
+        console.log(response);
+
         message.error('Ошибка при входе, попробуйте позже');
     };
 

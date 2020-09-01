@@ -9,6 +9,8 @@ import IndexPage from './pages/IndexPage';
 import { Layout, Menu } from 'antd';
 import AppHeader from './shared/components/AppHeader';
 import Auth from './pages/Auth';
+import projectFile from '../package.json';
+
 // import Header from './shared/components/Header';
 const { Header, Footer, Content } = Layout;
 
@@ -34,7 +36,7 @@ const App: FC = () => {
                                 </Switch>
                             </Router>
                         </Content>
-                        <Footer>Shcheglodom inc. 2020</Footer>
+                        <Footer>Shcheglodom inc. 2020. | v{projectFile.version}</Footer>
                     </Layout>
                     {/* <Header /> */}
                 </div>
