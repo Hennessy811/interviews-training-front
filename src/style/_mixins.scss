@@ -1,0 +1,6 @@
+@mixin flex-row($jc: space-between, $ai: center, $wrap: wrap) {
+    align-items: $ai;
+    display: flex;
+    flex-wrap: $wrap;
+    justify-content: $jc;
+}

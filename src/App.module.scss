@@ -1,0 +1,15 @@
+@import './style/styles';
+
+.app {
+    align-items: center;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    text-align: center;
+}
+
+.components {
+    width: 100%;
+
+    @include flex-row($jc: center);
+}
