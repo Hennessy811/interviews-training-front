@@ -10,6 +10,7 @@ import { Layout, Menu } from 'antd';
 import AppHeader from './shared/components/AppHeader';
 import Auth from './pages/Auth';
 import projectFile from '../package.json';
+import CreateScenario from './pages/CreateScenario';
 
 // import Header from './shared/components/Header';
 const { Header, Footer, Content } = Layout;
@@ -19,13 +20,13 @@ const App: FC = () => {
         <Provider store={store}>
             <div className={styles.App}>
                 <div className={styles.Components}>
-                    <Layout>
-                        <Header>
-                            <AppHeader />
-                        </Header>
-                        {/* 70px footer + 64px header */}
-                        <Content className={styles.content}>
-                            <Router>
+                    <Router>
+                        <Layout>
+                            <Header>
+                                <AppHeader />
+                            </Header>
+                            {/* 70px footer + 64px header */}
+                            <Content className={styles.content}>
                                 <Switch>
                                     <Route path="/" exact>
                                         <IndexPage />
@@ -33,11 +34,15 @@ const App: FC = () => {
                                     <Route path="/auth">
                                         <Auth />
                                     </Route>
+                                    <Route path="/create-scenario">
+                                        <CreateScenario />
+                                    </Route>
                                 </Switch>
-                            </Router>
-                        </Content>
-                        <Footer>Shcheglodom inc. 2020. | v{projectFile.version}</Footer>
-                    </Layout>
+                            </Content>
+                            <Footer>Shcheglodom inc. 2020. | v{projectFile.version}</Footer>
+                        </Layout>
+                    </Router>
+
                     {/* <Header /> */}
                 </div>
             </div>

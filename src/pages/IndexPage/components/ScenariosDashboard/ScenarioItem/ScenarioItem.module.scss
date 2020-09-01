@@ -1,0 +1,27 @@
+.ScenarioItem {
+}
+
+.scenarioCard {
+    width: 230px;
+    height: 150px;
+    background-color: #fff;
+    margin: 5px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+        background-color: rgb(228, 228, 228);
+    }
+
+    &.disabled {
+        color: rgb(126, 126, 126);
+        cursor: not-allowed;
+        background-color: rgb(209, 209, 209);
+    }
+}

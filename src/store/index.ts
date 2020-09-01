@@ -4,11 +4,14 @@ import user, { UsersState } from './Users/users.reducer';
 import createSagaMiddleware from 'redux-saga';
 import { rootUsersSaga } from './Users/users.sagas';
 import { all } from 'redux-saga/effects';
+import { ScenesState } from './Scenes/scenes.reducer';
+import { rootScenesSaga } from './Scenes/scenes.sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
 export interface RootStore {
     user: UsersState;
+    scenes: ScenesState;
 }
 
 export const rootReducer = combineReducers({
@@ -24,7 +27,7 @@ export const store = createStore(
 );
 
 const rootSaga = function* rootSaga() {
-    yield all([rootUsersSaga()]);
+    yield all([rootUsersSaga(), rootScenesSaga()]);
 };
 
 sagaMiddleware.run(rootSaga);

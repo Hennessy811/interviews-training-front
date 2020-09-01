@@ -6,11 +6,13 @@ import { useAuth } from '../../utils/hooks/useAuth';
 import { useDispatch, useSelector } from 'react-redux';
 import { UsersActions } from '../../../store/Users/users.actions';
 import { RootStore } from '../../../store';
+import { Link, useHistory } from 'react-router-dom';
 
 const AppHeader = () => {
     const user = useSelector((state: RootStore) => state.user.data);
     const auth = useAuth();
     const dispatch = useDispatch();
+    const history = useHistory();
 
     useEffect(() => {
         if (auth?.name) {
@@ -21,14 +23,19 @@ const AppHeader = () => {
         }
     }, [auth]);
 
+    console.log(history);
+
     return (
         <div className={styles.Header}>
             <div>
                 <div className="logo" />
-                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-                    <Menu.Item key="1">nav 1</Menu.Item>
-                    <Menu.Item key="2">nav 2</Menu.Item>
-                    <Menu.Item key="3">nav 3</Menu.Item>
+                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[history.location.pathname]}>
+                    <Menu.Item key="/">
+                        <Link to="/">Главная</Link>
+                    </Menu.Item>
+                    <Menu.Item key="/create-scenario">
+                        <Link to="/create-scenario">Создать сет</Link>
+                    </Menu.Item>
                 </Menu>
             </div>
             <div>
