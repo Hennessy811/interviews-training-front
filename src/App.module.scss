@@ -8,6 +8,14 @@
     text-align: center;
 }
 
+.content {
+    padding-top: 30px;
+    min-height: calc(100vh - 134px);
+    width: 100%;
+    max-width: 1024px;
+    margin: auto;
+}
+
 .components {
     width: 100%;
 

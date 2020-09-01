@@ -1,34 +1,13 @@
 import { Action } from '../../shared/interfaces/redux-interfaces';
 import { UsersActions } from './users.actions';
 
-export interface Geo {
-    lat: string;
-    lng: string;
-}
-
-export interface Addres {
-    street: string;
-    suite: string;
-    city: string;
-    zipcode: string;
-    geo: Geo;
-}
-
-export interface Company {
-    name: string;
-    catchPhrase: string;
-    bs: string;
-}
-
 export interface UserResponse {
-    id: number;
-    name: string;
-    username: string;
     email: string;
-    address: Addres;
-    phone: string;
-    website: string;
-    company: Company;
+    familyName: string;
+    givenName: string;
+    googleId: string;
+    imageUrl: string;
+    name: string;
 }
 
 export interface UsersState {
@@ -45,38 +24,29 @@ export const initialState: UsersState = {
 
 export default (state: UsersState = initialState, action: Action<UserResponse>): UsersState => {
     switch (action.type) {
-        case UsersActions.GetUser:
+        case UsersActions.SAVE_USER_SUCCESS:
+            localStorage.setItem('user', JSON.stringify(action.payload));
             return {
                 ...state,
+                data: action.payload,
+                loading: false,
+            };
+        case UsersActions.SAVE_USER_PENDING:
+            return {
+                ...state,
+                data: null,
                 loading: true,
             };
-        case UsersActions.GetUserSuccess:
+        case UsersActions.SAVE_USER_ERROR:
             return {
                 ...state,
+                data: null,
                 loading: false,
-                error: null,
-                data: action.payload,
-            };
-        case UsersActions.GetUserError:
-            return {
-                ...state,
                 error: true,
             };
-
-        case UsersActions.ChangeName:
-            return {
-                ...state,
-                loading: true,
-            };
-        case UsersActions.ChangeNameFinished:
-            return {
-                ...state,
-                loading: false,
-                data: {
-                    ...state.data,
-                    name: action.payload,
-                },
-            };
+        case UsersActions.LOGOUT:
+            localStorage.removeItem('user');
+            return initialState;
         default:
             return state;
     }

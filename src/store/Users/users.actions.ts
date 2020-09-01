@@ -1,8 +1,6 @@
 export enum UsersActions {
-    GetUser = '[Pending] Get User',
-    GetUserSuccess = '[Success] Get User',
-    GetUserError = '[Error] Get User',
-
-    ChangeName = 'Change name',
-    ChangeNameFinished = 'Change nameFinished',
+    LOGOUT = 'LOGOUT',
+    SAVE_USER_PENDING = 'SAVE_USER_PENDING',
+    SAVE_USER_SUCCESS = 'SAVE_USER_SUCCESS',
+    SAVE_USER_ERROR = 'SAVE_USER_ERROR',
 }

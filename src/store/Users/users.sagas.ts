@@ -1,34 +1,36 @@
 import { call, put, takeLatest, delay, takeEvery, all } from 'redux-saga/effects';
 import { getUser } from '../../shared/services/API/user';
 import { UsersActions } from './users.actions';
+import { Action } from '../../shared/interfaces/redux-interfaces';
+import { UserResponse } from './users.reducer';
 
-export function* fetchUser(action: any): any {
+export function* fetchUser(action: Action<UserResponse>): any {
     try {
         yield delay(1000);
-        const user = yield call(getUser, action.payload);
+        yield call(getUser, action.payload);
 
-        yield put({ type: UsersActions.GetUserSuccess, payload: user });
+        yield put({ type: UsersActions.SAVE_USER_SUCCESS, payload: action.payload });
     } catch (e) {
         yield put({
-            type: UsersActions.GetUserError,
+            type: UsersActions.SAVE_USER_ERROR,
             payload: { error: e.message },
         });
     }
 }
 
-function* changeName(action: any) {
-    yield delay(1000);
-    yield put({ type: UsersActions.ChangeNameFinished, payload: action.payload });
-}
+// function* changeName(action: any) {
+//     yield delay(1000);
+//     yield put({ type: UsersActions.ChangeNameFinished, payload: action.payload });
+// }
 
-export function* changeNameSaga(): any {
-    yield takeEvery(UsersActions.ChangeName, changeName);
-}
+// export function* changeNameSaga(): any {
+//     yield takeEvery(UsersActions.ChangeName, changeName);
+// }
 
-export function* userSaga(): any {
-    yield takeLatest(UsersActions.GetUser, fetchUser);
+export function* saveUser(): any {
+    yield takeLatest(UsersActions.SAVE_USER_PENDING, fetchUser);
 }
 
 export function* rootUsersSaga(): any {
-    yield all([userSaga(), changeNameSaga()]);
+    yield all([saveUser()]);
 }

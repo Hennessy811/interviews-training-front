@@ -1,26 +1,11 @@
 @import './mixins';
 @import './variables';
+@import './shared';
 
-.m-5 {
-    margin: 5px;
-}
-
-.mt-5 {
-    margin-top: 5px;
-}
-
-.mb-5 {
-    margin-bottom: 5px;
-}
-
-.ml-5 {
-    margin-left: 5px;
-}
-
-.mr-5 {
-    margin-right: 5px;
-}
-
-.m-15 {
-    margin: 15px;
+.logo {
+    width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px 24px 16px 0;
+    float: left;
 }
