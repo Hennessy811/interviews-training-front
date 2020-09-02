@@ -6,7 +6,10 @@ export const delay = (ms: number): Promise<void> => new Promise((res) => setTime
 export const getUser = async (user: UserResponse): Promise<UserResponse> => {
     console.log({ user });
 
-    return await fetch(`${BASE_URL}/api/login`, {
+    return await fetch(`${BASE_URL}/login`, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
         method: 'POST',
         body: JSON.stringify(user),
     }).then((r) => r.json());

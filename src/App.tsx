@@ -11,6 +11,8 @@ import AppHeader from './shared/components/AppHeader';
 import Auth from './pages/Auth';
 import projectFile from '../package.json';
 import CreateScenario from './pages/CreateScenario';
+import ScenarioPage from './pages/ScenarioPage';
+import SessionPage from './pages/SessionPage';
 
 // import Header from './shared/components/Header';
 const { Header, Footer, Content } = Layout;
@@ -36,6 +38,12 @@ const App: FC = () => {
                                     </Route>
                                     <Route path="/create-scenario">
                                         <CreateScenario />
+                                    </Route>
+                                    <Route path="/scenario/:id" exact>
+                                        <ScenarioPage />
+                                    </Route>
+                                    <Route path="/scenario/:scenarioId/:sessionId">
+                                        <SessionPage />
                                     </Route>
                                 </Switch>
                             </Content>

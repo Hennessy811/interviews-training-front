@@ -3,15 +3,16 @@
 
 .scenarioCard {
     width: 230px;
-    height: 150px;
-    background-color: #fff;
+    height: 180px;
+    line-height: 1;
+    // background-color: #fff;
     margin: 5px 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 15px;
-    border-radius: 6px;
+    padding-bottom: 15px;
+    // border-radius: 6px;
     cursor: pointer;
     transition: all 0.2s;
 

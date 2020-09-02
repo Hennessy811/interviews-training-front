@@ -36,6 +36,7 @@ const Auth = () => {
 
             <div>
                 <GoogleLogin
+                    isSignedIn
                     clientId="74999273921-07of8e9vvki6fvmas9c7vviqpofmnpl9.apps.googleusercontent.com"
                     buttonText="гугел"
                     onSuccess={onSuccess}

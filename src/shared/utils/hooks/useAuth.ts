@@ -12,7 +12,7 @@ export const useAuth = () => {
             const d = JSON.parse(localData);
             setAuth(d);
         }
-    }, []);
+    }, [localData]);
 
     return state || auth;
 };

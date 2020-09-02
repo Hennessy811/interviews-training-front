@@ -21,9 +21,7 @@ const AppHeader = () => {
                 payload: auth,
             });
         }
-    }, [auth]);
-
-    console.log(history);
+    }, [auth, dispatch]);
 
     return (
         <div className={styles.Header}>
