@@ -1,11 +1,12 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
 import styles from './SessionPage.module.scss';
 import cn from 'classnames';
-import { Typography, message, Tag, Skeleton, Card } from 'antd';
+import { Typography, message, Tag, Skeleton, Card, Button } from 'antd';
 import { sessionPageReducer, sessionPageInitialState, StateActions } from './SessionPage.store';
 import { BASE_URL, tagsColors } from '../../shared/utils/helpers';
 import { useParams } from 'react-router-dom';
 import { Scenario } from '../../shared/interfaces/scenario';
+import io from 'socket.io-client';
 
 const loadScenario = (id: string, updateFn: (r: Scenario) => void) => {
     fetch(`${BASE_URL}/scenes/${id}`)
@@ -19,6 +20,7 @@ const loadScenario = (id: string, updateFn: (r: Scenario) => void) => {
 const SessionPage = () => {
     const [state, dispatch] = useReducer(sessionPageReducer, sessionPageInitialState);
     const { scenarioId, sessionId } = useParams();
+    const [socket, setSocket] = useState<SocketIOClient.Socket | null>();
 
     useEffect(() => {
         loadScenario(scenarioId, (r) =>
@@ -27,7 +29,23 @@ const SessionPage = () => {
                 payload: r,
             }),
         );
+
+        setSocket(io(`${BASE_URL}`));
     }, []);
+
+    useEffect(() => {
+        if (socket) {
+            socket.on('connection', (r: any) => {
+                console.log(r);
+                message.success('Сессия начата');
+            });
+
+            socket.on('message_i', (s: any) => {
+                message.success('Сообщение');
+                console.log(s);
+            });
+        }
+    }, [socket]);
 
     const { data } = state;
 
@@ -51,6 +69,14 @@ const SessionPage = () => {
                         </Tag>
                     ))}
                 </div>
+
+                <Button
+                    onClick={() => {
+                        socket?.emit('message_k', 'hello world');
+                    }}
+                >
+                    send
+                </Button>
             </Card>
         </div>
     );

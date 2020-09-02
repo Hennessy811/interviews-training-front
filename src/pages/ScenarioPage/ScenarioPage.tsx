@@ -7,15 +7,16 @@ import { PlaySquareOutlined, LinkOutlined } from '@ant-design/icons';
 
 import { BASE_URL, tagsColors } from '../../shared/utils/helpers';
 import { scenarioPageReducer, scenarioPageInitialState, StateActions } from './ScenarioPage.store';
+import { RootStore } from '../../store';
+import { useSelector } from 'react-redux';
 
 const ScenarioPage = () => {
     const { id } = useParams();
     const h = useHistory();
     const [state, dispatch] = useReducer(scenarioPageReducer, scenarioPageInitialState);
+    const user = useSelector((state: RootStore) => state.user.data);
 
     const { data, loading, started } = state;
-
-    const sessionId = 'kek';
 
     useEffect(() => {
         fetch(`${BASE_URL}/scenes/${id}`)
@@ -56,6 +57,22 @@ const ScenarioPage = () => {
                                         <Button
                                             type="primary"
                                             onClick={() => {
+                                                const body = JSON.stringify({
+                                                    userId: user?._id,
+                                                    scenarioId: id,
+                                                });
+
+                                                console.log(body);
+
+                                                fetch(`${BASE_URL}/scenes/start`, {
+                                                    headers: {
+                                                        'Content-Type': 'application/json',
+                                                    },
+                                                    method: 'POST',
+                                                    body,
+                                                })
+                                                    .then((r) => r.json())
+                                                    .then((r) => h.push(`/scenario/${id}/${r._id}`));
                                                 dispatch({
                                                     type: StateActions.START,
                                                 });
@@ -85,7 +102,7 @@ const ScenarioPage = () => {
                                     <Button
                                         type="primary"
                                         // loading
-                                        onClick={() => h.push(`/scenario/${id}/${sessionId}`)}
+                                        // onClick={() => h.push(`/scenario/${id}/${sessionId}`)}
                                         // target="__blank"
                                     >
                                         <PlaySquareOutlined />

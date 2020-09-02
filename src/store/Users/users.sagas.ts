@@ -8,9 +8,9 @@ import { message } from 'antd';
 export function* fetchUser(action: Action<UserResponse>): any {
     try {
         yield delay(1000);
-        yield call(getUser, action.payload);
+        const d = yield call(getUser, action.payload);
 
-        yield put({ type: UsersActions.SAVE_USER_SUCCESS, payload: action.payload });
+        yield put({ type: UsersActions.SAVE_USER_SUCCESS, payload: d });
     } catch (e) {
         message.error('Ошибка при входе (1), попробуйте позже');
 

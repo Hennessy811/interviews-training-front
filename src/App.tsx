@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import styles from './App.module.scss';
 import { store } from './store';
 import './style/styles.scss';
 import IndexPage from './pages/IndexPage';
-import { Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 import AppHeader from './shared/components/AppHeader';
 import Auth from './pages/Auth';
 import projectFile from '../package.json';
@@ -50,8 +50,6 @@ const App: FC = () => {
                             <Footer>Shcheglodom inc. 2020. | v{projectFile.version}</Footer>
                         </Layout>
                     </Router>
-
-                    {/* <Header /> */}
                 </div>
             </div>
         </Provider>

@@ -2,6 +2,7 @@ import { Action } from '../../shared/interfaces/redux-interfaces';
 import { UsersActions } from './users.actions';
 
 export interface UserResponse {
+    _id: string;
     email: string;
     familyName: string;
     givenName: string;
