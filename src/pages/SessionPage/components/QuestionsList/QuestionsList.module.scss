@@ -1,0 +1,20 @@
+.QuestionsList {
+    max-height: 500px;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+.question {
+    white-space: nowrap;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border-bottom: 1px dashed #000;
+    height: 30px;
+    padding: 7px 10px;
+    line-height: 1.2;
+}
+
+.active {
+    background-color: rgb(245, 245, 245);
+}

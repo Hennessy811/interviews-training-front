@@ -16,7 +16,7 @@ export interface Question {
 
 export interface Session {
     title: string;
-    questions?: Pick<Scenario, 'title' | '_id'>[];
+    questions: Pick<Scenario, 'title' | '_id'>[];
     _id: string;
     id: string;
 }
