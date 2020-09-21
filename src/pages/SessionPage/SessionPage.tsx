@@ -112,14 +112,22 @@ const SessionPage = () => {
 
                         <div>
                             <Question
-                                onNext={() => {
+                                onNext={({ mark, answer }) => {
                                     dispatch({
                                         type: StateActions.NEXT,
+                                        payload: {
+                                            mark,
+                                            answer,
+                                        },
                                     });
                                 }}
-                                onPrev={() => {
+                                onPrev={({ mark, answer }) => {
                                     dispatch({
                                         type: StateActions.PREV,
+                                        payload: {
+                                            mark,
+                                            answer,
+                                        },
                                     });
                                 }}
                                 question={questionsList[state.currentQuestion]}

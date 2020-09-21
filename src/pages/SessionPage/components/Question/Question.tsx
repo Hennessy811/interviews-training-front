@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styles from './Question.module.scss';
 import cn from 'classnames';
 import { Typography, Slider, Button, Space } from 'antd';
@@ -8,18 +8,33 @@ import { FrownOutlined, SmileOutlined, ArrowRightOutlined, ArrowLeftOutlined } f
 
 interface QuestionProps {
     question: QuestionInterface;
-    onNext: () => void;
-    onPrev: () => void;
+    onNext: ({ mark, answer }: { mark: number; answer: string }) => void;
+    onPrev: ({ mark, answer }: { mark: number; answer: string }) => void;
 }
 
+const marksEmojis = {
+    1: '❌',
+    2: '🙄',
+    3: '🤨',
+    4: '👌',
+    5: '✅',
+};
+
 const Question: FC<QuestionProps> = ({ question, onNext, onPrev }) => {
-    console.log({ question });
+    const [mark, setMark] = useState(3);
+    const [answer, setAnswer] = useState('');
+
+    // Reset to default
+    useEffect(() => {
+        setAnswer('');
+        setMark(3);
+    }, [question]);
 
     return (
         <div className="mt-50">
             <Typography.Title level={3}>{question.title}</Typography.Title>
 
-            <TextArea></TextArea>
+            <TextArea value={answer} onChange={(e) => setAnswer(e.target.value)}></TextArea>
 
             <div className="mt-20">
                 <Typography.Title level={4}>Насколько ты согласен с ответом</Typography.Title>
@@ -31,13 +46,9 @@ const Question: FC<QuestionProps> = ({ question, onNext, onPrev }) => {
                 <Slider
                     style={{ width: '300px' }}
                     dots
-                    marks={{
-                        1: '❌',
-                        2: '🙄',
-                        3: '🤨',
-                        4: '👌',
-                        5: '✅',
-                    }}
+                    value={mark}
+                    onChange={(e: any) => setMark(e)}
+                    marks={marksEmojis}
                     min={1}
                     max={5}
                 />
@@ -48,11 +59,11 @@ const Question: FC<QuestionProps> = ({ question, onNext, onPrev }) => {
 
             <div className="mt-20">
                 <Space>
-                    <Button type="ghost" onClick={() => onPrev()}>
+                    <Button type="ghost" onClick={() => onPrev({ mark, answer })}>
                         <ArrowLeftOutlined />
                         Предыдущий
                     </Button>
-                    <Button type="primary" onClick={() => onNext()}>
+                    <Button type="primary" onClick={() => onNext({ mark, answer })}>
                         Следующий
                         <ArrowRightOutlined />
                     </Button>
